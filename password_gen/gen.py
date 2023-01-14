@@ -18,23 +18,24 @@ def menu()->None:
 
 def gen_pass_menu()->None:
     length = int(input("Provide password length: "))
-    upper = input("Use upper case letters (y/N): ").lower()
-    digits = input("Use digits (y/N): ").lower()
-    special = input("Use special characters (y/N): ").lower()
-    print(f"\nGenerated password: {gen_pass(length, upper, digits, special)}")
+    upper = input("Use upper case letters (y/N): ").lower() == "y"
+    digits = input("Use digits (y/N): ").lower() == "y"
+    special = input("Use special characters (y/N): ").lower() == "y"
+    print(f"\nGenerated password: {gen_pass(length, upper, digits, special)}\n")
+    menu()
 
-def gen_pass(length:int, upper:str, digit:str, special:str)->str:
+def gen_pass(length:int, upper:bool, digit:bool, special:bool)->str:
     alpha = "abcdefghijklmnopqrstuxyz"
     alpha_big = "ABCDEFGHIJKLMNOPQRSTUXYZ"
     digits = "0123456789"
     specials = "^!\"§$%&/()=?+*-:,;_#"
 
     useables = alpha
-    if upper == "y":
+    if upper:
         useables += alpha_big
-    if digit == "y":
+    if digit:
         useables += digits
-    if special == "y":
+    if special:
         useables += specials
     
     password = ""
